@@ -1,0 +1,346 @@
+/* ==========================================================================
+   ALLTREK INDONESIA - MASTER DESIGN SYSTEM (Pure Vanilla CSS)
+   ========================================================================== */
+
+:root {
+  /* --- COLOR PALETTE (Midnight Expedition) --- */
+  --bg-base: #0B110D;
+  --bg-surface: #141D18;
+  --bg-elevated: #1D2A23;
+  
+  --text-primary: #EAEFEA;
+  --text-muted: #8A9A92;
+  --text-inverse: #0B110D;
+  
+  --accent-blaze: #FF4500;
+  --accent-blaze-hover: #E03D00;
+  --accent-moss: #557A46;
+  
+  --border-thin: rgba(234, 239, 234, 0.08);
+  --border-focus: rgba(255, 69, 0, 0.4);
+
+  /* --- TYPOGRAPHY --- */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  
+  /* Fluid Typography (Min Size, Preferred Size, Max Size) */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --text-hero: clamp(3rem, 2rem + 5vw, 5rem);
+
+  /* --- LAYOUT & SPACING --- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+  
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --container-max: 1400px;
+  
+  /* --- ANIMATIONS --- */
+  --transition-fast: 0.2s ease;
+  --transition-bounce: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-bottom: var(--space-xl);
+  
+  /* Topographical Background Pattern (SVG inline) */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c13.866 0 25.362 10.135 27.765 23.513 1.125 6.25 4.673 11.666 9.873 15.132 5.2 3.465 11.624 4.793 17.842 3.694C76.993 58.468 85 49.336 85 38c0-11.046 8.954-20 20-20v2c-9.941 0-18 8.059-18 18 0 12.355-8.884 22.457-21.054 24.364-5.69.897-11.564-.316-16.326-3.487-4.761-3.17-8.01-8.128-9.04-13.856C36.335 30.125 24.516 20 11 20v-2zM99 78v2c-23.748 0-43-19.252-43-43 0-11.046-8.954-20-20-20v-2c12.15 0 22 9.85 22 22 0 22.644 18.356 41 41 41zM0 78c22.644 0 41-18.356 41-41 0-12.15 9.85-22 22-22v2c-11.046 0-20 8.954-20 20 0 23.748-19.252 43-43 43v-2zm100-2v2c-11.046 0-20-8.954-20-20 0-23.748-19.252-43-43-43v-2c22.644 0 41 18.356 41 41 0 11.046 8.954 20 20 20zM0 98c11.046 0 20-8.954 20-20 0-23.748 19.252-43 43-43v-2c-24.853 0-45 20.147-45 45 0 11.046-8.954 20-20 20v-2z' fill='%23EAEFEA' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==========================================================================
+   UTILITY CLASSES (Architectural)
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.text-accent {
+  color: var(--accent-blaze);
+}
+
+/* Page Transition Animation */
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(15px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.page-animate {
+  animation: pageEnter 0.6s var(--transition-bounce) forwards;
+}
+
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
+
+/* --- Buttons --- */
+.btn-blaze {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--accent-blaze);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color var(--transition-fast);
+  isolation: isolate;
+}
+
+.btn-blaze::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-blaze);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-bounce);
+  z-index: -1;
+}
+
+.btn-blaze:hover {
+  color: var(--text-inverse);
+}
+
+.btn-blaze:hover::before {
+  transform: scaleX(1);
+}
+
+/* --- Layout Grids (Asymmetric) --- */
+.grid-bento {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: max-content;
+  gap: var(--space-sm);
+}
+
+/* Feature for asymmetrical hero grids can be added locally in components */
+
+/* --- Technical Spec Card --- */
+.tech-card {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.tech-card:hover {
+  border-color: var(--accent-blaze);
+}
+
+.tech-card .img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background-color: var(--bg-elevated);
+}
+
+.tech-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) grayscale(0.2);
+  transition: filter var(--transition-bounce), transform var(--transition-bounce);
+}
+
+.tech-card:hover img {
+  filter: brightness(1) grayscale(0);
+  transform: scale(1.05);
+}
+
+/* Crosshair Effect on Hover */
+.tech-card .crosshair {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-color: var(--accent-blaze);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tech-card:hover .crosshair {
+  opacity: 1;
+}
+
+.tech-card .ch-tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+.tech-card .ch-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+.tech-card .ch-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+.tech-card .ch-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+.tech-card .content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.tech-card h3 {
+  font-size: var(--text-base);
+  margin-bottom: 0.2rem;
+}
+
+.tech-card .price {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* --- Tactical Tab Button --- */
+.btn-tab {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-thin);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.btn-tab.active {
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+  border-color: var(--text-primary);
+}
+
+/* --- Back Link with Shift Animation --- */
+.link-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.link-back:hover {
+  color: var(--accent-blaze);
+}
+
+.link-back span {
+  transition: transform var(--transition-fast);
+  display: inline-block;
+}
+
+.link-back:hover span {
+  transform: translateX(-4px);
+}
+
+/* --- Tactical Input & Textarea --- */
+.input-tactical {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-thin);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-tactical:focus {
+  border-color: var(--accent-blaze);
+  box-shadow: 0 0 0 2px var(--border-focus);
+}
+
+/* --- Quantity Buttons --- */
+.btn-qty {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-thin);
+  color: var(--text-primary);
+  padding: 2px 8px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all var(--transition-fast);
+}
+
+.btn-qty:hover {
+  border-color: var(--accent-blaze);
+  background: var(--bg-surface);
+}
+
+/* --- Text Links --- */
+.link-hover-accent {
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+.link-hover-accent:hover {
+  color: var(--accent-blaze);
+}
